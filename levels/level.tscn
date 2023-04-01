@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://nr670a10hhpd"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_debqh"]
+[ext_resource type="PackedScene" uid="uid://d1t5dcynyhepw" path="res://objects/carrier.tscn" id="1_tj1xt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i07ev"]
+friction = 0.0
+bounce = 4.91
+
+[node name="level" type="Node2D"]
+script = ExtResource("1_debqh")
+carrier_count = 10
+carrier_scene = ExtResource("1_tj1xt")
+
+[node name="level_bounds" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_i07ev")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="level_bounds"]
+build_mode = 1
+polygon = PackedVector2Array(0, 0, 1920, 0, 1920, 1080, 0, 1080)

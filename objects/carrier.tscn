@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1t5dcynyhepw"]
+
+[ext_resource type="Script" path="res://objects/carrier.gd" id="1_53jox"]
+[ext_resource type="Shader" path="res://objects/carrier.gdshader" id="1_j6thc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8hlxy"]
+friction = 0.0
+bounce = 3.34
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pt15i"]
+radius = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iuaf7"]
+shader = ExtResource("1_j6thc")
+shader_parameter/radius = null
+
+[node name="Carrier" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_8hlxy")
+script = ExtResource("1_53jox")
+
+[node name="collision_shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pt15i")
+debug_color = Color(0.8, 0.0352941, 1, 0.419608)
+
+[node name="canvas" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_iuaf7")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2

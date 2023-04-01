@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://glfrpkx88ome"]
+
+[ext_resource type="PackedScene" uid="uid://nr670a10hhpd" path="res://levels/level.tscn" id="1_8aeae"]
+[ext_resource type="Script" path="res://ui/level_ui.gd" id="1_ak4ut"]
+[ext_resource type="Script" path="res://ui/level_container.gd" id="1_ddl30"]
+
+[node name="level_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ak4ut")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="level_container" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_ddl30")
+
+[node name="level" parent="HBoxContainer/level_container" instance=ExtResource("1_8aeae")]
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Optionen"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Anzahl Carrier"
+
+[node name="carrier_count" type="SpinBox" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="restart_button" type="Button" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[connection signal="resized" from="HBoxContainer/level_container" to="HBoxContainer/level_container" method="_on_resized"]
+[connection signal="value_changed" from="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/carrier_count" to="HBoxContainer/level_container/level" method="_on_carrier_count_value_changed"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/restart_button" to="HBoxContainer/level_container/level" method="_on_restart_button_pressed"]
